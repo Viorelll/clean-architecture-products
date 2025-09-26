@@ -1,0 +1,24 @@
+name: Provision - Shared - DEV
+
+# Create shared container registry
+# Create storage container for X-environment
+
+on:
+  workflow_dispatch:
+
+jobs:
+  terraform-plan:
+    uses: viorelll/clean-architecture-products/.github/workflows/terraform-plan.yml@main
+    with:
+      working-directory: terraform/shared_dev
+      environment: shared
+      plan-artifact-name: tfplan
+    secrets: inherit
+  terraform-apply:
+    uses: viorelll/clean-architecture-products/.github/workflows/terraform-apply.yml@main
+    needs: terraform-plan
+    with:
+      working-directory: terraform/shared_dev
+      environment: shared
+      plan-artifact-name: tfplan
+    secrets: inherit
