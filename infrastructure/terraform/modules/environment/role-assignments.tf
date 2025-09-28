@@ -1,11 +1,11 @@
 ### ASSIGN KEY VAULT ADMINISTRATOR & APP CONFIGURATION DATA OWNER FOR TERRAFORM APPLY USER (LOCAL SIGN IN USER/TERRAFORM APP REGISTRATION)
 ### ASSIGN THIS ROLES IS POSSIBLE IF TERRAFORM APP REGISTRATION IS OWNER IN KEY_VALUT/APP_CONFIG
 # Terraform user as keyvault admin
-resource "azurerm_role_assignment" "terraform_keyvault_admin" {
-  scope                = azurerm_key_vault.this.id
-  role_definition_name = "Key Vault Administrator"
-  principal_id         = data.azurerm_client_config.current.object_id
-}
+# resource "azurerm_role_assignment" "terraform_keyvault_admin" {
+#   scope                = azurerm_key_vault.this.id
+#   role_definition_name = "Key Vault Administrator"
+#   principal_id         = data.azurerm_client_config.current.object_id
+# }
 
 # Terraform user as App Configuration Data Owner so it can create app config keys 
 # resource "azurerm_role_assignment" "terraform_app_config_admin" {
