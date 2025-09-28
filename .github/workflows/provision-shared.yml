@@ -10,7 +10,7 @@ jobs:
   terraform-plan:
     uses: viorelll/clean-architecture-products/.github/workflows/terraform-plan.yml@main
     with:
-      working-directory: terraform/shared
+      working-directory: infrastructure/terraform/shared-backend
       environment: shared
       plan-artifact-name: tfplan
     secrets: inherit
@@ -18,7 +18,7 @@ jobs:
     uses: viorelll/clean-architecture-products/.github/workflows/terraform-apply.yml@main
     needs: terraform-plan
     with:
-      working-directory: terraform/shared
+      working-directory: infrastructure/terraform/shared-backend
       environment: shared
       plan-artifact-name: tfplan
     secrets: inherit
