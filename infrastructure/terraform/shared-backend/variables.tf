@@ -8,6 +8,11 @@ variable "region_identifier" {
   default = "plc"
 }
 
+variable "region_name" {
+  type    = string
+  default = "polandcentral"
+}
+
 variable "shared_identifier" {
   type    = string
   default = "shared"
@@ -19,6 +24,5 @@ variable "dev_identifier" {
 }
 
 locals {
-  shared_resource_group_name  = "rg-${var.application_name}-${var.shared_identifier}-${var.region_identifier}-01"
-  shared_storage_account_name = "st${var.application_name}${var.shared_identifier}${var.region_identifier}02"
+  shared_resource_group_name = "rg-${var.application_name}-${var.shared_identifier}-${var.region_identifier}"
 }
