@@ -1,4 +1,4 @@
-name: Backend - Realese DEV - (Build & Deploy .NET Web App)
+name: Backend - Realese DEV
 
 on:
     workflow_dispatch:
