@@ -1,0 +1,58 @@
+name: Backend - Realese DEV - (Build & Deploy .NET Web App)
+
+on:
+    workflow_dispatch:
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repo
+              uses: actions/checkout@v4
+
+            - name: Setup .NET
+              uses: actions/setup-dotnet@v4
+              with:
+                  dotnet-version: "9.0.x"
+
+            - name: Restore dependencies
+              run: dotnet restore dotnet restore ./backend/src/Web/Web.csproj
+
+            - name: Build backend
+              run: dotnet build dotnet restore ./backend/src/Web/Web.csproj --configuration Release --no-restore
+
+            - name: Run tests
+              run: dotnet test ./backend/tests/Application.UnitTests/Application.UnitTests.csproj --no-restore --verbosity normal
+
+            - name: Publish backend
+              run: dotnet publish ./backend/src/Web/Web.csproj -c Release -o ./publish
+
+            - name: Upload build artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                  name: app-artifacts
+                  path: |
+                      ./publish/**
+
+    deploy:
+        runs-on: ubuntu-latest
+        needs: build
+        environment: dev
+
+        steps:
+            - name: Checkout repo
+              uses: actions/checkout@v4
+
+            - name: Download artifacts
+              uses: actions/download-artifact@v4
+              with:
+                  name: app-artifacts
+                  path: ./artifacts
+
+            # Deploy backend to Azure Web App
+            - name: Deploy .NET API to Azure WebApp
+              uses: azure/webapps-deploy@v2
+              with:
+                  app-name: myapp-dev-api
+                  publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+                  package: ./artifacts/publish
