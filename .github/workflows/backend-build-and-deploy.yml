@@ -16,10 +16,10 @@ jobs:
                   dotnet-version: "9.0.x"
 
             - name: Restore dependencies
-              run: dotnet restore dotnet restore ./backend/src/Web/Web.csproj
+              run: dotnet restore ./backend/src/Web/Web.csproj
 
             - name: Build backend
-              run: dotnet build dotnet restore ./backend/src/Web/Web.csproj --configuration Release --no-restore
+              run: dotnet build ./backend/src/Web/Web.csproj --configuration Release --no-restore
 
             - name: Run tests
               run: dotnet test ./backend/tests/Application.UnitTests/Application.UnitTests.csproj --no-restore --verbosity normal
@@ -53,6 +53,6 @@ jobs:
             - name: Deploy .NET API to Azure WebApp
               uses: azure/webapps-deploy@v2
               with:
-                  app-name: myapp-dev-api
+                  app-name: webapp-products-dev-gwc # your Azure App Service name
                   publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
                   package: ./artifacts/publish
