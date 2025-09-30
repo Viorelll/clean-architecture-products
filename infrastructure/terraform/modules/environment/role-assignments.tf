@@ -23,11 +23,11 @@ resource "azurerm_role_assignment" "terraform_keyvault_admin" {
 
 ## Set roles for Managed Identity (UAI)
 #Access for container apps to read keyvault
-# resource "azurerm_role_assignment" "container_apps_keyvault" {
-#   scope                = azurerm_key_vault.this.id
-#   role_definition_name = "Key Vault Secrets User"
-#   principal_id         = azurerm_user_assigned_identity.container_apps.principal_id
-# }
+resource "azurerm_role_assignment" "container_apps_keyvault" {
+  scope                = azurerm_key_vault.this.id
+  role_definition_name = "Key Vault Secrets User"
+  principal_id         = azurerm_user_assigned_identity.uami.principal_id
+}
 
 
 # Access for container apps identity to pull images from container registry

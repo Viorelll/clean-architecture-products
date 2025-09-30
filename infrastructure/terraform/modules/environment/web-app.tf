@@ -12,6 +12,11 @@ resource "azurerm_linux_web_app" "webapp" {
   location            = azurerm_resource_group.rg_env.location
   service_plan_id     = azurerm_service_plan.plan.id
 
+  identity {
+    type         = "UserAssigned"
+    identity_ids = [azurerm_user_assigned_identity.uami.id]
+  }
+
   site_config {
     always_on = "false"
 
