@@ -45,6 +45,7 @@ resource "azurerm_linux_web_app" "testwebapp" {
     identity_ids = [azurerm_user_assigned_identity.uami.id]
   }
 
+  key_vault_reference_identity_id = azurerm_user_assigned_identity.uami.id
 
   site_config {
     always_on = "false"
