@@ -35,10 +35,16 @@ resource "azurerm_linux_web_app" "webapp" {
 
 
 resource "azurerm_linux_web_app" "testwebapp" {
-  name                = "testviobrio"
+  name                = "testviobrio2"
   resource_group_name = azurerm_resource_group.rg_env.name
   location            = azurerm_resource_group.rg_env.location
   service_plan_id     = azurerm_service_plan.plan.id
+
+  identity {
+    type         = "UserAssigned"
+    identity_ids = [azurerm_user_assigned_identity.uami.id]
+  }
+
 
   site_config {
     always_on = "false"
