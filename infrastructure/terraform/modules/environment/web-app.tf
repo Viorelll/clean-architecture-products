@@ -13,7 +13,7 @@ resource "azurerm_linux_web_app" "webapp" {
   service_plan_id     = azurerm_service_plan.plan.id
 
   identity {
-    type         = "UserAssigned"
+    type         = "UserAssigned" # add SystemAssigned if not works (web app + user assigned => bug in azure on reading key vault reference?)
     identity_ids = [azurerm_user_assigned_identity.uami.id]
   }
 
