@@ -44,9 +44,9 @@ module "environment" {
     azurerm.shared_connectivity = azurerm.shared_connectivity
   }
 
-  sqldb_auto_pause_delay_in_minutes = 120
+  sqldb_auto_pause_delay_in_minutes = 0 //120
   sqldb_sku                         = "S0"
-  sqldb_min_capacity                = 0.5
+  sqldb_min_capacity                = 0 //0.5
   sqldb_admin_username              = "product_admin"
   sqldb_zone_redundant              = false
 }

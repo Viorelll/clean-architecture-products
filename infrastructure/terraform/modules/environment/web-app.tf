@@ -53,4 +53,8 @@ resource "azurerm_linux_web_app" "testwebapp" {
       dotnet_version = "9.0"
     }
   }
+
+  app_settings = {
+    ConnectionStrings__CleanArchitectureApiDb = "@Microsoft.KeyVault(VaultName=${azurerm_key_vault.this.name};SecretName=${azurerm_key_vault_secret.sqldb_connection_string_products.name})"
+  }
 }
