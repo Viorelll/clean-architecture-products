@@ -27,6 +27,6 @@ resource "azurerm_linux_web_app" "webapp" {
 
 
   app_settings = {
-    ConnectionStrings = "@Microsoft.KeyVault(VaultName=${azurerm_key_vault.this.name};SecretName=${azurerm_key_vault_secret.sqldb_connection_string_products.name})"
+    ConnectionStrings__CleanArchitectureApiDb = "@Microsoft.KeyVault(VaultName=${azurerm_key_vault.this.name};SecretName=${azurerm_key_vault_secret.sqldb_connection_string_products.name})"
   }
 }
